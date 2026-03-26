@@ -1,38 +1,127 @@
-# Guardian-Mesh: AI Governance Control Plane
-
-## Overview
-
-Guardian-Mesh is an enterprise-grade AI governance layer designed to address key challenges in large-scale AI adoption:
-
-- Data privacy risks (PII leakage)
-- Uncontrolled LLM costs (FinOps)
-- Hallucinations and unreliable outputs
-
-It acts as a Zero-Trust AI control plane between users and LLMs, enforcing governance, optimizing cost, and validating outputs in real time.
-
-Guardian-Mesh combines capabilities of a firewall, cost optimization engine, and output validation system for AI platforms.
 
 ---
 
-## One-Line Value Proposition
+## Core Components
 
-A Zero-Trust AI control plane that governs, optimizes, and validates every LLM interaction.
+### Sentry Agent (Pre-Processor)
 
----
-
-## Why This Project Matters
-
-As enterprises adopt Generative AI, they face:
-
-- Unmonitored AI usage
-- Sensitive data exposure
-- Increasing token costs
-- Lack of trust in outputs
-
-Guardian-Mesh introduces a governed execution layer that brings control, visibility, and reliability to AI systems.
+- Detects and masks sensitive data using regex and local inference
+- Prevents exposure of emails, API keys, and sensitive identifiers
+- Enforces zero-trust input validation
 
 ---
 
-## Architecture Diagram
+### Budgeter Agent (FinOps Engine)
 
-> Add your architecture image in the `assets` folder
+- Applies token budget policies
+- Dynamically selects optimal execution path
+- Routes complex queries to cloud models
+- Routes simple queries to local models
+- Enables cost optimization
+
+---
+
+### Intelligent Router
+
+- Routes requests through a unified abstraction layer
+- Supports multiple LLM providers via LiteLLM
+- Decouples application logic from model providers
+
+---
+
+### Auditor Agent (Post-Processor)
+
+- Validates responses using rule-based and agent-driven checks
+- Detects hallucinations, policy violations, and unsafe outputs
+- Supports response blocking, rewriting, and escalation
+
+---
+
+### Observability and Governance Layer
+
+- Provides real-time monitoring using Streamlit
+- Tracks token usage, cost savings, risk scores, and audit logs
+
+---
+
+## Key Capabilities
+
+### Data Protection
+
+- Local PII masking before external calls
+- Prevents sensitive data from leaving system boundaries
+
+### Cost Optimization
+
+- Budget-aware routing strategy
+- Reduces dependency on expensive cloud models
+
+### Output Reliability
+
+- Detects hallucinations and unsafe responses
+- Applies validation and correction mechanisms
+
+### Observability
+
+- Provides visibility into AI usage and behavior
+- Enables governance and auditability
+
+---
+
+## Technology Stack
+
+| Layer | Technology |
+|------|------------|
+| Orchestration | LangGraph |
+| Gateway | LiteLLM, FastAPI |
+| Local Models | Ollama |
+| Governance | Regex, custom policies |
+| Validation | Guardrails, custom logic |
+| UI | Streamlit |
+
+---
+
+## Execution Flow
+
+1. Input is intercepted and sanitized  
+2. Budget and complexity are evaluated  
+3. Request is routed to the optimal model  
+4. Output is validated for safety and compliance  
+5. Metrics are captured for governance and optimization  
+
+---
+
+## Example Use Case
+
+**Input:**
+
+Analyze customer data containing emails and identifiers
+
+**System Behavior:**
+
+- Sensitive data is masked locally
+- Request is routed based on complexity
+- Output is validated for compliance
+- Risk score is generated
+
+---
+
+## Business Impact
+
+- Reduces risk of data leakage
+- Lowers AI operational cost
+- Improves reliability of AI-generated outputs
+- Enables scalable enterprise AI adoption
+
+---
+
+## Installation and Setup
+
+```bash
+git clone https://github.com/suhasini-ai-architect/ai-governance-control-plane.git
+cd guardian-mesh
+
+python -m venv venv
+.\venv\Scripts\activate
+
+pip install -r requirements.txt
