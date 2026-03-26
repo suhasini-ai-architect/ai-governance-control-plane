@@ -55,7 +55,7 @@ Guardian-Mesh treats LLM interactions as untrusted traffic and applies a multi-s
 
 ## Architecture Diagram
 
-![Guardian Mesh Architecture](./assets/guardian-mesh-architecture.png)
+![architecture](asset/guardian-mesh.pn)
 
 ---
 
