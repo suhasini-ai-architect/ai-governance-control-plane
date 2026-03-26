@@ -1,137 +1,148 @@
-🛡️ Guardian-Mesh (The Governance Control Plane)
+Guardian-Mesh: AI Governance Control Plane
+Overview
 
-Guardian-Mesh is an enterprise-grade architectural prototype designed to solve the three biggest barriers to AI adoption:
+Guardian-Mesh is an enterprise-grade AI governance layer designed to address the key challenges in large-scale AI adoption:
 
-🔐 Data Privacy (PII Leakage)
-💰 Uncontrolled LLM Costs (FinOps)
-⚠️ Hallucinations & Unreliable Outputs
+Data privacy risks (PII leakage)
+Uncontrolled LLM costs (FinOps)
+Hallucinations and unreliable outputs
 
-It acts as a Zero-Trust AI Proxy Layer that sits between users and LLMs, enforcing governance, optimizing cost, and validating responses in real time.
+It acts as a Zero-Trust AI control plane between users and LLMs, enforcing governance, optimizing cost, and validating outputs in real time.
 
-🌟 Executive Summary
+Guardian-Mesh can be positioned as a unified layer combining a firewall, cost optimization engine, and output validation system for AI platforms.
 
-As enterprises scale AI, they face Shadow AI risks—unmonitored usage, data leaks, and spiraling costs.
+One-Line Value Proposition
 
-Guardian-Mesh introduces a control plane for AI systems:
+A Zero-Trust AI control plane that governs, optimizes, and validates every LLM interaction.
 
-Intercepts every LLM request
-Applies PII scrubbing locally
-Dynamically routes requests between Cloud LLMs (Azure OpenAI) and Local SLMs (Ollama)
-Validates outputs using an Agentic Audit Loop
+Why This Project Matters
 
-👉 Think of it as a "Firewall + FinOps Engine + Quality Gate" for AI systems
+As enterprises adopt Generative AI, they face systemic risks:
 
-🧠 Architecture Overview
-User Request
-     ↓
-🛡️ Sentry Agent (Pre-Processor)
-     ↓
-💰 Budgeter Agent (FinOps Decision)
-     ↓
-🔀 Intelligent Router
-     ↓
-☁️ Cloud LLM  |  🖥️ Local LLM (Ollama)
-     ↓
-🔍 Auditor Agent (Post-Processor)
-     ↓
-📊 Telemetry Dashboard (Streamlit)
+Unmonitored and uncontrolled AI usage
+Exposure of sensitive enterprise data
+Rapid increase in token consumption and cost
+Lack of trust in model-generated outputs
 
----
-## Architecture Diagram
+Guardian-Mesh introduces a governed execution layer that brings control, visibility, and reliability to AI systems.
 
-![architecture](asset/architecture.jpg)
+Architecture Diagram
 
----
+Add your architecture image here.
 
-🚀 Key Features
-🔐 Zero-Trust PII Scrubbing
-Regex-based local redaction of:
-Emails
-API Keys
-SSNs / Sensitive IDs
-Ensures zero data leakage outside network
-💰 Dynamic FinOps Routing
-“Budgeter Agent” enforces daily token quotas
-Routes:
-🧠 Complex tasks → Cloud LLM (Azure OpenAI)
-⚡ Simple tasks → Local SLM (Ollama)
-Achieves ~40% cost reduction
-🔁 Agentic Audit Loop
-LangGraph-powered self-correcting workflow
-Validates:
-Hallucinations
-Compliance violations
-Risky outputs
-Blocks or rewrites unsafe responses
-📊 Real-Time Risk & Cost Telemetry
-Streamlit dashboard showing:
-Token usage
-Cost saved
-Blocked threats
-Risk score
-🛠️ Tech Stack (Enterprise Positioning)
-Layer	Component	Enterprise Value
-Orchestration	LangGraph	Stateful, cyclic reasoning workflows
-LLM Gateway	LiteLLM + FastAPI	Vendor-agnostic LLM abstraction
-Local Inference	Ollama (Llama / Phi)	Reduces cost & data egress
-Governance	Custom Regex Scrubber	Zero-dependency, high-speed PII masking
-Validation	Guardrails AI	Output validation & safety checks
-UI / Observability	Streamlit	Real-time cost & risk visibility
-⚙️ Installation & Setup
-# Clone repository
+![Guardian Mesh Architecture](./assets/guardian-mesh-architecture.png)
+Architecture Overview
+User / Application
+        ↓
+Guardian-Mesh Control Plane
+        ↓
+Input Guard Layer (PII Protection and Injection Defense)
+        ↓
+Sentry Agent (Pre-Processing)
+        ↓
+Budgeter Agent (Cost and Policy Decision)
+        ↓
+Intelligent Router (Execution Layer)
+        ↓
+Cloud LLM (Azure OpenAI) or Local LLM (Ollama)
+        ↓
+Auditor Agent (Validation and Risk Control)
+        ↓
+Observability Layer (Cost, Risk, Usage, Logs)
+Core Components
+Sentry Agent (Pre-Processor)
+Detects and masks sensitive data using regex and local inference
+Prevents exposure of emails, API keys, and sensitive identifiers
+Enforces zero-trust input validation
+Budgeter Agent (FinOps Engine)
+Applies token budget policies
+Dynamically selects optimal execution path
+Routes complex queries to cloud models
+Routes simple queries to local models
+Enables cost optimization
+Intelligent Router
+Routes requests through a unified abstraction layer
+Uses LiteLLM for multi-provider support
+Decouples application logic from model providers
+Auditor Agent (Post-Processor)
+Validates responses using rule-based and agent-driven checks
+Detects hallucinations, policy violations, and unsafe outputs
+Supports response blocking, rewriting, and escalation
+Observability and Governance Layer
+Provides real-time monitoring using Streamlit
+Tracks token usage, cost savings, risk scores, and audit logs
+Key Capabilities
+Data Protection
+Local PII masking before external calls
+Prevents sensitive data from leaving system boundaries
+Cost Optimization
+Budget-aware routing strategy
+Reduces dependency on expensive cloud models
+Enables efficient AI resource utilization
+Output Reliability
+Detects hallucinations and unsafe responses
+Applies validation and correction mechanisms
+Observability
+Provides visibility into AI usage and behavior
+Enables governance and auditability
+Technology Stack
+Layer	Technology
+Orchestration	LangGraph
+Gateway	LiteLLM, FastAPI
+Local Models	Ollama
+Governance	Regex and custom policies
+Validation	Guardrails and custom logic
+UI	Streamlit
+Execution Flow
+Input is intercepted and sanitized
+Budget and complexity are evaluated
+Request is routed to the optimal model
+Output is validated for safety and compliance
+Metrics are captured for governance and optimization
+Example Use Case
+
+Input:
+Analyze customer data containing emails and identifiers
+
+System behavior:
+
+Sensitive data is masked locally
+Request is routed based on complexity
+Output is validated for compliance
+Risk score is generated
+Business Impact
+Reduces risk of data leakage
+Lowers AI operational cost
+Improves reliability of AI-generated outputs
+Enables scalable enterprise AI adoption
+Installation and Setup
 git clone https://github.com/suhasini-ai-architect/ai-governance-control-plane.git
 cd guardian-mesh
 
-# Create virtual environment
 python -m venv venv
-
-# Activate environment
-# Windows:
 .\venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
 
-# Install dependencies
-pip install --upgrade pip
 pip install -r requirements.txt
-
-# (Optional manual install)
-pip install streamlit langgraph litellm pandas
-▶️ Running the Project
-# Start backend (if using FastAPI)
-uvicorn app.main:app --reload
-
-# Launch dashboard
+Running the Application
 streamlit run app.py
-🔄 Multi-Agent Execution Flow
+Positioning Statement
 
-Guardian-Mesh replaces the traditional:
+This project demonstrates:
 
-User → LLM
+Enterprise AI governance architecture
+Multi-agent orchestration design
+Cost-aware LLM routing (AI FinOps)
+Secure and scalable AI system design
+Future Enhancements
+Integration with enterprise SIEM tools
+Policy-based governance and access control
+Multi-model orchestration
+Kubernetes-based deployment
+Author
 
-with a multi-agent governance circuit:
+Enterprise AI Architect
+Multi-Agent Systems, AI Governance, Cloud Architecture
 
-1. 🛡️ Sentry (Pre-Processor)
-Detects:
-PII
-Prompt Injection
-Uses local SLM or regex
-2. 💰 Budgeter (FinOps Agent)
-Reads daily quota from config
-Decides:
-Cloud vs Local model
-3. 🔀 Router
-Routes request via LiteLLM
-Abstracts provider complexity
-4. 🔍 Auditor (Post-Processor)
-Validates response using:
-Rule-based checks
-Critic Agent / RAGAS
-Flags:
-Hallucinations
-Compliance risks
-5. 📊 Telemetry Layer
-Tracks:
-Cost savings
-Risk score
-Token usage
+Conclusion
+
+Guardian-Mesh represents a reference architecture for enterprise AI governance, enabling organizations to adopt and scale AI systems with control, transparency, and cost efficiency.
