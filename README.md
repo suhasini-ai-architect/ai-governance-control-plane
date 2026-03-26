@@ -125,3 +125,29 @@ python -m venv venv
 .\venv\Scripts\activate
 
 pip install -r requirements.txt
+
+## Running the Application
+
+streamlit run app.py
+
+## Positioning Statement
+
+This project demonstrates:
+
+Enterprise AI governance architecture
+Multi-agent orchestration design
+Cost-aware LLM routing (AI FinOps)
+Secure and scalable AI system design
+Future Enhancements
+Integration with enterprise SIEM tools
+Policy-based governance and access control
+Multi-model orchestration
+Kubernetes deployment
+Author
+
+## Enterprise AI Architect
+Multi-Agent Systems, AI Governance, Cloud Architecture
+
+## Conclusion
+
+Guardian-Mesh is a reference architecture for enterprise AI governance, enabling organizations to scale AI systems with control, transparency, and cost efficiency.
