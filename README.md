@@ -79,7 +79,7 @@ Validation	Guardrails AI	Output validation & safety checks
 UI / Observability	Streamlit	Real-time cost & risk visibility
 ⚙️ Installation & Setup
 # Clone repository
-git clone https://github.com/your-repo/guardian-mesh.git
+git clone https://github.com/suhasini-ai-architect/ai-governance-control-plane.git
 cd guardian-mesh
 
 # Create virtual environment
